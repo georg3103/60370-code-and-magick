@@ -1,7 +1,5 @@
+'use strict';
 window.renderStatistics = function (ctx, names, times) {
-
-  // SHADOW + function
-
   function renderRect(color, opacity, x, y, width, height) {
     ctx.fillStyle = 'rgba(' + color + ', ' + color + ', ' + color + ', ' + opacity + ')';
     ctx.strokeRect(x, y, width, height);
@@ -15,7 +13,6 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText('Список результатов: ', 120, 60);
   }
 
-  // Find max SCORE
   function findMaxValue() {
     var max = -1;
 
@@ -28,7 +25,7 @@ window.renderStatistics = function (ctx, names, times) {
     return max;
   }
 
-  // Histogram parametres + uppercase
+  // Histogram parameters
   var HISTOGRAMWIDTH = 40;
   var BARHEIGHT = 150;
   var SCORE = BARHEIGHT / findMaxValue();
@@ -50,7 +47,7 @@ window.renderStatistics = function (ctx, names, times) {
   // Painting
   function makeHistogram() {
     for (var j = 0; j < times.length; j++) {
-      // Colore bars
+      // Color bars
       if (names[j] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       } else {
