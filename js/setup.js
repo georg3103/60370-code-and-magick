@@ -49,8 +49,6 @@ window.setup = (function () {
     target.classList.remove('hidden');
   };
 
-  removeHiddenClass(setupBlock);
-
   var randomBoolean = function () {
     return Math.random() >= 0.5;
   };
@@ -98,5 +96,66 @@ window.setup = (function () {
   generateMages(mages);
 
   removeHiddenClass(usersBlock);
+
+  // Взаимодействие с сайтом
+
+  var setupOpen = document.querySelector('.setup-open');
+  var setupClose = setupBlock.querySelector('.setup-close');
+
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
+
+  var onPopupEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closePopup();
+    }
+  };
+
+  var onPopupEnterPress = function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      openPopup();
+    }
+  };
+
+  var openPopup = function () {
+    setupBlock.classList.remove('hidden');
+    document.addEventListener('keydown', onPopupEscPress);
+  };
+
+  var closePopup = function () {
+    setupBlock.classList.add('hidden');
+  };
+
+  setupOpen.addEventListener('click', openPopup);
+  setupOpen.addEventListener('keydown', onPopupEnterPress);
+
+  setupClose.addEventListener('click', closePopup);
+
+  var userNameInput = setupBlock.querySelector('.setup-user-name');
+
+  userNameInput.addEventListener('invalid', function () {
+    if (userNameInput.validity.tooShort) {
+      userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+    }
+    if (userNameInput.validity.tooLong) {
+      userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+    }
+    if (userNameInput.validity.valueMissing) {
+      userNameInput.setCustomValidity('Обязательное поле');
+    } else {
+      userNameInput.setCustomValidity('');
+    }
+  });
+
+  // решение валидации для Edge (не поддерживает атрибут minlength)
+
+  userNameInput.addEventListener('input', function (evt) {
+    var target = evt.target;
+    if (target.value.length < 2) {
+      target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+    } else {
+      target.setCustomValidity('');
+    }
+  });
 
 })();
