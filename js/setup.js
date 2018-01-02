@@ -40,6 +40,14 @@ window.setup = (function () {
     'green'
   ];
 
+  var MAGE_FIRE_BALL_COLORS = [
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
+  ];
+
   var setupBlock = document.querySelector('.setup');
   var usersBlock = document.querySelector('.setup-similar');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -157,5 +165,27 @@ window.setup = (function () {
       target.setCustomValidity('');
     }
   });
+
+  // Изменение состояния персонажа
+
+  var wizardCoat = document.querySelector('.wizard-coat');
+  var wizardEyes = document.querySelector('.wizard-eyes');
+  var wizardFireBall = document.querySelector('.setup-fireball-wrap');
+
+  var changeCoat = function () {
+    wizardCoat.style.fill = getRandomArray(MAGE_COAT_COLORS)[0];
+  };
+
+  var changeEyes = function () {
+    wizardEyes.style.fill = getRandomArray(MAGE_EYE_COLORS)[0];
+  };
+
+  var changeFireBall = function () {
+    wizardFireBall.style.background = getRandomArray(MAGE_FIRE_BALL_COLORS)[0];
+  };
+
+  wizardCoat.addEventListener('click', changeCoat);
+  wizardEyes.addEventListener('click', changeEyes);
+  wizardFireBall.addEventListener('click', changeFireBall);
 
 })();
