@@ -4,7 +4,9 @@ window.dialog = (function () {
 
   var setupBlock = document.querySelector('.setup');
   var dialogHandle = setupBlock.querySelector('.setup-user-pic');
+
   var setupClose = setupBlock.querySelector('.setup-close');
+  var setupOpen = document.querySelector('.setup-open');
 
   var dialogDefaultCoords = function () {
     setupBlock.style.top = 80 + 'px';
@@ -48,5 +50,6 @@ window.dialog = (function () {
   });
 
   setupClose.addEventListener('click', dialogDefaultCoords);
+  setupOpen.addEventListener('keydown', dialogDefaultCoords);
 
 })();
