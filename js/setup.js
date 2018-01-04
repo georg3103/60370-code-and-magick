@@ -22,12 +22,14 @@ window.setup = (function () {
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEYCODE) {
+      evt.preventDefault();
       closePopup();
     }
   };
 
   var onPopupEnterPress = function (evt) {
     if (evt.keyCode === window.util.ENTER_KEYCODE) {
+      evt.preventDefault();
       openPopup();
     }
   };
@@ -43,7 +45,6 @@ window.setup = (function () {
 
   setupOpen.addEventListener('click', openPopup);
   setupOpen.addEventListener('keydown', onPopupEnterPress);
-
   setupClose.addEventListener('click', closePopup);
 
   // Изменение состояния персонажа
@@ -67,5 +68,48 @@ window.setup = (function () {
   wizardCoat.addEventListener('click', changeCoat);
   wizardEyes.addEventListener('click', changeEyes);
   wizardFireBall.addEventListener('click', changeFireBall);
+
+  // перетаскивание предметов
+
+  var shopElement = document.querySelector('.setup-artifacts-shop');
+  var draggedItem = null;
+  var clone = null;
+
+  shopElement.addEventListener('dragstart', function (evt) {
+    if (evt.target.tagName.toLowerCase() === 'img') {
+      clone = evt.target.cloneNode(true);
+      draggedItem = evt.target;
+      evt.dataTransfer.setData('text/plain', evt.target.alt);
+    }
+  });
+
+  var artifactsElement = document.querySelector('.setup-artifacts');
+
+  artifactsElement.addEventListener('dragover', function (evt) {
+    evt.preventDefault();
+    return false;
+  });
+
+  artifactsElement.addEventListener('drop', function (evt) {
+    evt.target.style.backgroundColor = '';
+    console.log(evt.target.tagName.toLowerCase() === 'img');
+    if (evt.target.tagName.toLowerCase() === 'img' === false) {
+      evt.target.appendChild(clone);
+    } else {
+      evt.target.removeChild(evt.target.parentNode.childNodes[0]);
+    }
+    evt.preventDefault();
+  });
+
+
+  artifactsElement.addEventListener('dragenter', function (evt) {
+    evt.target.style.backgroundColor = 'yellow';
+    evt.preventDefault();
+  });
+
+  artifactsElement.addEventListener('dragleave', function (evt) {
+    evt.target.style.backgroundColor = '';
+    evt.preventDefault();
+  });
 
 })();

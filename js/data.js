@@ -1,7 +1,7 @@
 'use strict';
 
 window.data = (function () {
-  debugger;
+
   var MAGE_NAMES = [
     'Иван',
     'Хуан Себастьян',
@@ -84,10 +84,6 @@ window.data = (function () {
     });
     similarListElement.appendChild(fragment);
   };
-
-
-  console.log(getMages(4));
-
 
   return {
     getMages: getMages,
