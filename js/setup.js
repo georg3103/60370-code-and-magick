@@ -3,22 +3,10 @@
 window.setup = (function () {
 
   var setupBlock = document.querySelector('.setup');
-  var usersBlock = document.querySelector('.setup-similar');
-
-  var removeHiddenClass = function (target) {
-    target.classList.remove('hidden');
-  };
-
-  var mages = window.data.getMages(4);
-
-  window.data.generateMages(mages);
-
-  removeHiddenClass(usersBlock);
-
-  // Взаимодействие с сайтом
-
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setupBlock.querySelector('.setup-close');
+
+  window.backend.load(window.backend.successHandler, window.backend.errorHandler);
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEYCODE) {

@@ -49,45 +49,21 @@ window.data = (function () {
     '#e6e848'
   ];
 
-  var setupBlock = document.querySelector('.setup');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-  var similarListElement = setupBlock.querySelector('.setup-similar-list');
-
-  var getMages = function (mageNumber) {
-    var mageArray = [];
-
-    for (var i = 0; i < mageNumber; i++) {
-      mageArray.push({});
-
-      mageArray[i].name = window.util.getRandomArray(MAGE_NAMES)[i] + ' ' + window.util.getRandomArray(MAGE_LASTNAMES)[i];
-      mageArray[i].coat = window.util.getRandomArray(MAGE_COAT_COLORS)[i];
-      mageArray[i].eye = window.util.getRandomArray(MAGE_EYE_COLORS)[i];
-    }
-    return mageArray;
-  };
 
   var renderMage = function (mage) {
     var mageElement = similarWizardTemplate.cloneNode(true);
 
     mageElement.querySelector('.setup-similar-label').textContent = mage.name;
-    mageElement.querySelector('.wizard-coat').style.fill = mage.coat;
+    mageElement.querySelector('.wizard-coat').style.fill = mage.colorCoat;
     mageElement.querySelector('.wizard-eyes').style.fill = mage.eye;
 
     return mageElement;
   };
 
-  var generateMages = function (mageList) {
-    var fragment = document.createDocumentFragment();
-
-    mageList.forEach(function (element) {
-      fragment.appendChild(renderMage(element));
-    });
-    similarListElement.appendChild(fragment);
-  };
 
   return {
-    getMages: getMages,
-    generateMages: generateMages,
+    renderMage: renderMage,
     MAGE_NAMES: MAGE_NAMES,
     MAGE_LASTNAMES: MAGE_LASTNAMES,
     MAGE_COAT_COLORS: MAGE_COAT_COLORS,

@@ -15,7 +15,9 @@ window.colorize = (function () {
   };
 
   var colorizeElement = function (element, colorArray, callback) {
-    callback(element, colorArray);
+    if (typeof callback === 'function') {
+      callback(element, colorArray);
+    }
   };
 
   var colorizeCoat = function () {
