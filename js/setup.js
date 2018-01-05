@@ -47,28 +47,6 @@ window.setup = (function () {
   setupOpen.addEventListener('keydown', onPopupEnterPress);
   setupClose.addEventListener('click', closePopup);
 
-  // Изменение состояния персонажа
-
-  var wizardCoat = document.querySelector('.wizard-coat');
-  var wizardEyes = document.querySelector('.wizard-eyes');
-  var wizardFireBall = document.querySelector('.setup-fireball-wrap');
-
-  var changeCoat = function () {
-    wizardCoat.style.fill = window.util.getRandomArray(window.data.MAGE_COAT_COLORS)[0];
-  };
-
-  var changeEyes = function () {
-    wizardEyes.style.fill = window.util.getRandomArray(window.data.MAGE_EYE_COLORS)[0];
-  };
-
-  var changeFireBall = function () {
-    wizardFireBall.style.background = window.util.getRandomArray(window.data.MAGE_FIRE_BALL_COLORS)[0];
-  };
-
-  wizardCoat.addEventListener('click', changeCoat);
-  wizardEyes.addEventListener('click', changeEyes);
-  wizardFireBall.addEventListener('click', changeFireBall);
-
   // перетаскивание предметов
 
   var shopElement = document.querySelector('.setup-artifacts-shop');
@@ -93,8 +71,6 @@ window.setup = (function () {
   artifactsElement.addEventListener('drop', function (evt) {
     evt.preventDefault();
     evt.target.style.backgroundColor = '';
-    // console.log(evt.target.tagName.toLowerCase() === 'img');
-    // console.log(evt.target.hasChildNodes());
     if (evt.target.tagName.toLowerCase() === 'img' === false && evt.target.hasChildNodes() === false) {
       evt.target.appendChild(clone);
     }
