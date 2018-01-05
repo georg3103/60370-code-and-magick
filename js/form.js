@@ -1,8 +1,9 @@
 'use strict';
 
 window.form = (function () {
+
   var setupBlock = document.querySelector('.setup');
-  var userNameInput = setupBlock.querySelector('.setup-user-name');
+  var userNameInput = document.querySelector('.setup-user-name');
 
   userNameInput.addEventListener('invalid', function () {
     if (userNameInput.validity.tooShort) {
@@ -27,6 +28,19 @@ window.form = (function () {
     } else {
       target.setCustomValidity('');
     }
-  })();
+  });
 
-});
+  // проверка отправки формы
+
+  var form = document.querySelector('.setup-submit');
+  form.addEventListener('click', function (evt) {
+    console.log('работает');
+    // window.backend.upload(new FormData(form), window.backend.successHandler, window.backend.errorHandler);
+    window.backend.upload(new FormData(form), function () {
+      setupBlock.classList.add('hidden');
+    }, window.backend.errorHandler);
+    setupBlock.classList.add('hidden');
+    evt.preventDefault();
+  });
+
+})();
